@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Presensi Kelas - QR Code</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+</head>
+
+<body>
+
+    <!-- SEMUA ISI WEBSITE KAMU DI SINI -->
+    <!-- Mulai dari <div class="container"> -->
+    <!-- sampai </div> sebelum script -->
+
+    <div class="container">
+
+        <div class="icon-circle">
+            <i class="fas fa-qrcode"></i>
+        </div>
+
+        <h1>Presensi Kelas</h1>
+        <p class="subtitle">Scan QR Code untuk Absensi</p>
+
+        <div class="qr-wrapper">
+            <img id="qrImage" src="" alt="QR Code Presensi">
+
+            <div class="qr-label">
+                <i class="fas fa-check-circle" style="color:#25d366;"></i>
+                Scan untuk hadir
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-success" onclick="loadDataMahasiswa()">
+                <i class="fas fa-sync-alt"></i> Refresh Data
+            </button>
+
+            <button class="btn btn-outline" onclick="downloadQR()">
+                <i class="fas fa-download"></i> Download QR
+            </button>
+
+            <a href="https://docs.google.com/spreadsheets/d/1PXOSZAXZNg7hvX-33DglZlM3saj4yclUhiYepiFNYhI/edit?gid=0#gid=0"
+               target="_blank"
+               class="btn btn-secondary">
+                <i class="fas fa-external-link-alt"></i> Buka Sheet
+            </a>
+        </div>
+
+        <div class="qr-generate-section">
+            <div class="qr-label">
+                <i class="fas fa-qrcode"></i>
+                Generate QR Code Mahasiswa
+            </div>
+
+            <div class="qr-input-group">
+                <input type="text"
+                       id="qrNimInput"
+                       placeholder="Masukkan NIM"
+                       maxlength="10">
+
+                <button onclick="generateQRCode()">
+                    <i class="fas fa-qrcode"></i> Generate
+                </button>
+            </div>
+
+            <div class="qr-preview" id="qrPreview">
+
+                <img id="qrResultImage" src="" alt="QR Code">
+
+                <div class="qr-info" id="qrInfo"></div>
+
+                <div class="qr-actions">
+                    <button class="btn-download" onclick="downloadQRCode()">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+
+                    <button class="btn-close" onclick="closeQRPreview()">
+                        <i class="fas fa-times"></i> Tutup
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="connection-status" id="connectionStatus">
+            <span class="dot checking" id="statusDot"></span>
+            <span id="statusLabel">Mengecek koneksi...</span>
+        </div>
+
+        <div id="status"></div>
+
+        <div class="divider">
+            <span>scan QR Code</span>
+        </div>
+
+        <div class="scanner-area" id="scannerArea">
+
+            <div id="qr-reader"></div>
+
+            <div class="scanner-overlay">
+
+                <div class="scan-frame">
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+
+                    <div class="scan-line"></div>
+                </div>
+
+                <div class="scan-text">
+                    <i class="fas fa-qrcode"></i>
+                    <span id="scanStatusText">Arahkan ke QR Code</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="scanner-controls">
+
+            <button class="btn-scan"
+                    id="btnStartScan"
+                    onclick="toggleScanner()">
+
+                <i class="fas fa-play"></i>
+                <span id="btnScanLabel">Mulai Scan</span>
+
+            </button>
+
+            <button class="btn-flash"
+                    id="btnFlash"
+                    onclick="toggleFlash()">
+
+                <i class="fas fa-bolt"></i>
+
+            </button>
+
+        </div>
+
+        <div class="data-section">
+
+            <div class="data-header">
+
+                <div class="title">
+                    <i class="fas fa-users"></i>
+                    Daftar Mahasiswa
+                </div>
+
+                <span class="count" id="totalMahasiswa">
+                    0 mahasiswa
+                </span>
+
+            </div>
+
+            <div class="table-wrapper" id="tableWrapper">
+
+                <div class="loading-text" id="loadingData">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Memuat data...
+                </div>
+
+                <table id="dataTable" style="display:none;">
+
+                    <thead>
+                        <tr>
+                            <th>NIM</th>
+                            <th>Nama</th>
+                            <th>Kelas</th>
+                            <th>Jurusan</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tableBody"></tbody>
+
+                </table>
+
+            </div>
+        </div>
+
+        <div class="footer-note">
+
+            <i class="fas fa-shield-alt"></i>
+            Terhubung dengan
+
+            <a href="https://docs.google.com/spreadsheets/d/1PXOSZAXZNg7hvX-33DglZlM3saj4yclUhiYepiFNYhI/edit?gid=646034675#gid=646034675"
+               target="_blank">
+                Google Sheets
+            </a>
+
+            <br>
+
+            <span style="font-size:10px; opacity:0.6;">
+
+                <i class="fas fa-check-circle"
+                   style="color:#25d366;"></i>
+
+                Status:
+                <span id="presensiStatus">
+                    Menunggu scan
+                </span>
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT TERPISAH -->
+    <script src="script.js"></script>
+
+</body>
+</html>
