@@ -1,292 +1,265 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Absensi Mahasiswa - Nova Maulidia</title>
+    <title>Presensi Kelas - QR Code</title>
 
-    <!-- CSS -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <link rel="stylesheet" href="style.css">
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 </head>
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
+    <div class="container">
 
-    <header>
-        <nav class="navbar">
+        <div class="icon-circle">
+            <i class="fas fa-qrcode"></i>
+        </div>
 
-            <div class="logo">
-                Nova<span>Absensi</span>
+        <h1>Presensi Kelas</h1>
+        <p class="subtitle">Scan QR Code untuk Absensi</p>
+
+        <div class="qr-wrapper">
+            <img id="qrImage" src="" alt="QR Code Presensi">
+
+            <div class="qr-label">
+                <i class="fas fa-check-circle"></i>
+                Scan untuk hadir
             </div>
+        </div>
 
-            <ul class="nav-menu">
-                <li><a href="#beranda">Beranda</a></li>
-                <li><a href="#absensi">Absensi</a></li>
-                <li><a href="#riwayat">Riwayat</a></li>
-            </ul>
+        <div class="btn-group">
 
-        </nav>
-    </header>
+            <button class="btn btn-success" onclick="loadDataMahasiswa()">
+                <i class="fas fa-sync-alt"></i>
+                Refresh Data
+            </button>
 
+            <button class="btn btn-outline" onclick="downloadQR()">
+                <i class="fas fa-download"></i>
+                Download QR
+            </button>
 
-    <!-- ================= BERANDA ================= -->
+            <a href="https://docs.google.com/spreadsheets/d/1PXOSZAXZNg7hvX-33DglZlM3saj4yclUhiYepiFNYhI/edit?gid=0#gid=0"
+               target="_blank"
+               class="btn btn-secondary">
 
-    <section id="beranda" class="hero">
-
-        <div class="hero-text">
-
-            <p class="small-title">SISTEM INFORMASI ABSENSI</p>
-
-            <h1>
-                Absensi <span>Mahasiswa</span>
-            </h1>
-
-            <p>
-                Selamat datang di sistem absensi mahasiswa.
-                Silakan lakukan absensi sesuai dengan kehadiran kamu.
-            </p>
-
-            <a href="#absensi" class="btn">
-                Mulai Absensi
+                <i class="fas fa-external-link-alt"></i>
+                Buka Sheet
             </a>
 
         </div>
 
-        <div class="hero-card">
+        <div class="qr-generate-section">
 
-            <div class="icon">📋</div>
-
-            <h2>Nova Maulidia</h2>
-
-            <p>Teknik Informatika</p>
-
-            <div class="info">
-                <span>NIM</span>
-                <b>23110001</b>
+            <div class="qr-label">
+                <i class="fas fa-qrcode"></i>
+                Generate QR Code Mahasiswa
             </div>
 
-        </div>
+            <div class="qr-input-group">
 
-    </section>
+                <input
+                    type="text"
+                    id="qrNimInput"
+                    placeholder="Masukkan NIM"
+                    maxlength="10"
+                >
 
+                <button onclick="generateQRCode()">
+                    <i class="fas fa-qrcode"></i>
+                    Generate
+                </button>
 
-    <!-- ================= ABSENSI ================= -->
+            </div>
 
-    <section id="absensi" class="section">
+            <div class="qr-preview" id="qrPreview">
 
-        <div class="section-title">
+                <img id="qrResultImage" src="" alt="QR Code">
 
-            <p>KEHADIRAN</p>
+                <div class="qr-info" id="qrInfo"></div>
 
-            <h2>Form Absensi</h2>
+                <div class="qr-actions">
 
-            <span>
-                Silakan isi data kehadiran kamu
-            </span>
-
-        </div>
-
-
-        <div class="absensi-container">
-
-            <div class="form-card">
-
-                <form id="formAbsensi">
-
-                    <label for="nama">
-                        Nama Mahasiswa
-                    </label>
-
-                    <input
-                        type="text"
-                        id="nama"
-                        value="Nova Maulidia"
-                        readonly
-                    >
-
-
-                    <label for="nim">
-                        NIM
-                    </label>
-
-                    <input
-                        type="text"
-                        id="nim"
-                        value="23110001"
-                        readonly
-                    >
-
-
-                    <label for="matakuliah">
-                        Mata Kuliah
-                    </label>
-
-                    <select id="matakuliah" required>
-
-                        <option value="">
-                            -- Pilih Mata Kuliah --
-                        </option>
-
-                        <option value="Rekayasa Perangkat Lunak">
-                            Rekayasa Perangkat Lunak
-                        </option>
-
-                        <option value="Pemrograman Web">
-                            Pemrograman Web
-                        </option>
-
-                        <option value="Basis Data">
-                            Basis Data
-                        </option>
-
-                        <option value="Sistem Operasi">
-                            Sistem Operasi
-                        </option>
-
-                    </select>
-
-
-                    <label for="status">
-                        Status Kehadiran
-                    </label>
-
-                    <select id="status" required>
-
-                        <option value="">
-                            -- Pilih Status --
-                        </option>
-
-                        <option value="Hadir">
-                            Hadir
-                        </option>
-
-                        <option value="Izin">
-                            Izin
-                        </option>
-
-                        <option value="Sakit">
-                            Sakit
-                        </option>
-
-                        <option value="Alpa">
-                            Alpa
-                        </option>
-
-                    </select>
-
-
-                    <button type="submit">
-                        Simpan Absensi
+                    <button class="btn-download" onclick="downloadQRCode()">
+                        <i class="fas fa-download"></i>
+                        Download
                     </button>
 
-                </form>
+                    <button class="btn-close" onclick="closeQRPreview()">
+                        <i class="fas fa-times"></i>
+                        Tutup
+                    </button>
 
-            </div>
-
-
-            <!-- Statistik -->
-
-            <div class="statistik">
-
-                <h3>Statistik Kehadiran</h3>
-
-                <div class="stat-card hadir">
-                    <span>Hadir</span>
-                    <strong id="jumlahHadir">0</strong>
-                </div>
-
-                <div class="stat-card izin">
-                    <span>Izin</span>
-                    <strong id="jumlahIzin">0</strong>
-                </div>
-
-                <div class="stat-card sakit">
-                    <span>Sakit</span>
-                    <strong id="jumlahSakit">0</strong>
-                </div>
-
-                <div class="stat-card alpa">
-                    <span>Alpa</span>
-                    <strong id="jumlahAlpa">0</strong>
                 </div>
 
             </div>
 
         </div>
 
-    </section>
+        <div class="connection-status" id="connectionStatus">
 
+            <span class="dot checking" id="statusDot"></span>
 
-    <!-- ================= RIWAYAT ================= -->
-
-    <section id="riwayat" class="section">
-
-        <div class="section-title">
-
-            <p>DATA ABSENSI</p>
-
-            <h2>Riwayat Kehadiran</h2>
-
-            <span>
-                Daftar riwayat absensi Nova Maulidia
+            <span id="statusLabel">
+                Mengecek koneksi...
             </span>
 
         </div>
 
+        <div id="status"></div>
 
-        <div class="table-container">
+        <div class="divider">
+            <span>scan QR Code</span>
+        </div>
 
-            <table>
+        <div class="scanner-area" id="scannerArea">
 
-                <thead>
+            <div id="qr-reader"></div>
 
-                    <tr>
-                        <th>No</th>
-                        <th>Tanggal</th>
-                        <th>Jam</th>
-                        <th>Mata Kuliah</th>
-                        <th>Status</th>
-                    </tr>
+            <div class="scanner-overlay">
 
-                </thead>
+                <div class="scan-frame">
 
-                <tbody id="tabelAbsensi">
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
 
-                    <!-- Data akan muncul melalui JavaScript -->
+                    <div class="scan-line"></div>
 
-                </tbody>
+                </div>
 
-            </table>
+                <div class="scan-text">
+
+                    <i class="fas fa-qrcode"></i>
+
+                    <span id="scanStatusText">
+                        Arahkan ke QR Code
+                    </span>
+
+                </div>
+
+            </div>
 
         </div>
 
-    </section>
+        <div class="scanner-controls">
 
+            <button
+                class="btn-scan"
+                id="btnStartScan"
+                onclick="toggleScanner()"
+            >
 
-    <!-- ================= FOOTER ================= -->
+                <i class="fas fa-play"></i>
 
-    <footer>
+                <span id="btnScanLabel">
+                    Mulai Scan
+                </span>
 
-        <p>
-            © 2026 Nova Maulidia | Sistem Absensi Mahasiswa
-        </p>
+            </button>
 
-    </footer>
+            <button
+                class="btn-flash"
+                id="btnFlash"
+                onclick="toggleFlash()"
+            >
 
+                <i class="fas fa-bolt"></i>
 
-    <!-- JavaScript -->
+            </button>
+
+        </div>
+
+        <div class="data-section">
+
+            <div class="data-header">
+
+                <div class="title">
+
+                    <i class="fas fa-users"></i>
+
+                    Daftar Mahasiswa
+
+                </div>
+
+                <span class="count" id="totalMahasiswa">
+                    0 mahasiswa
+                </span>
+
+            </div>
+
+            <div class="table-wrapper" id="tableWrapper">
+
+                <div class="loading-text" id="loadingData">
+
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Memuat data...
+
+                </div>
+
+                <table id="dataTable" style="display:none;">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>NIM</th>
+                            <th>Nama</th>
+                            <th>Kelas</th>
+                            <th>Jurusan</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tableBody"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <div class="footer-note">
+
+            <i class="fas fa-shield-alt"></i>
+            Terhubung dengan
+
+            <a
+                href="https://docs.google.com/spreadsheets/d/1PXOSZAXZNg7hvX-33DglZlM3saj4yclUhiYepiFNYhI/edit?gid=646034675#gid=646034675"
+                target="_blank"
+            >
+                Google Sheets
+            </a>
+
+            <br>
+
+            <span style="font-size:10px; opacity:0.6;">
+
+                <i class="fas fa-check-circle"></i>
+
+                Status:
+
+                <span id="presensiStatus">
+                    Menunggu scan
+                </span>
+
+            </span>
+
+        </div>
+
+    </div>
+
     <script src="script.js"></script>
 
 </body>
-
 </html>
