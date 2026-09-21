@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Absensi Mahasiswa - Nova Maulidia</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header>
+        <nav class="navbar">
+
+            <div class="logo">
+                Nova<span>Absensi</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="#beranda">Beranda</a></li>
+                <li><a href="#absensi">Absensi</a></li>
+                <li><a href="#riwayat">Riwayat</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- ================= BERANDA ================= -->
+
+    <section id="beranda" class="hero">
+
+        <div class="hero-text">
+
+            <p class="small-title">SISTEM INFORMASI ABSENSI</p>
+
+            <h1>
+                Absensi <span>Mahasiswa</span>
+            </h1>
+
+            <p>
+                Selamat datang di sistem absensi mahasiswa.
+                Silakan lakukan absensi sesuai dengan kehadiran kamu.
+            </p>
+
+            <a href="#absensi" class="btn">
+                Mulai Absensi
+            </a>
+
+        </div>
+
+        <div class="hero-card">
+
+            <div class="icon">📋</div>
+
+            <h2>Nova Maulidia</h2>
+
+            <p>Teknik Informatika</p>
+
+            <div class="info">
+                <span>NIM</span>
+                <b>23110001</b>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABSENSI ================= -->
+
+    <section id="absensi" class="section">
+
+        <div class="section-title">
+
+            <p>KEHADIRAN</p>
+
+            <h2>Form Absensi</h2>
+
+            <span>
+                Silakan isi data kehadiran kamu
+            </span>
+
+        </div>
+
+
+        <div class="absensi-container">
+
+            <div class="form-card">
+
+                <form id="formAbsensi">
+
+                    <label for="nama">
+                        Nama Mahasiswa
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nama"
+                        value="Nova Maulidia"
+                        readonly
+                    >
+
+
+                    <label for="nim">
+                        NIM
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nim"
+                        value="23110001"
+                        readonly
+                    >
+
+
+                    <label for="matakuliah">
+                        Mata Kuliah
+                    </label>
+
+                    <select id="matakuliah" required>
+
+                        <option value="">
+                            -- Pilih Mata Kuliah --
+                        </option>
+
+                        <option value="Rekayasa Perangkat Lunak">
+                            Rekayasa Perangkat Lunak
+                        </option>
+
+                        <option value="Pemrograman Web">
+                            Pemrograman Web
+                        </option>
+
+                        <option value="Basis Data">
+                            Basis Data
+                        </option>
+
+                        <option value="Sistem Operasi">
+                            Sistem Operasi
+                        </option>
+
+                    </select>
+
+
+                    <label for="status">
+                        Status Kehadiran
+                    </label>
+
+                    <select id="status" required>
+
+                        <option value="">
+                            -- Pilih Status --
+                        </option>
+
+                        <option value="Hadir">
+                            Hadir
+                        </option>
+
+                        <option value="Izin">
+                            Izin
+                        </option>
+
+                        <option value="Sakit">
+                            Sakit
+                        </option>
+
+                        <option value="Alpa">
+                            Alpa
+                        </option>
+
+                    </select>
+
+
+                    <button type="submit">
+                        Simpan Absensi
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- Statistik -->
+
+            <div class="statistik">
+
+                <h3>Statistik Kehadiran</h3>
+
+                <div class="stat-card hadir">
+                    <span>Hadir</span>
+                    <strong id="jumlahHadir">0</strong>
+                </div>
+
+                <div class="stat-card izin">
+                    <span>Izin</span>
+                    <strong id="jumlahIzin">0</strong>
+                </div>
+
+                <div class="stat-card sakit">
+                    <span>Sakit</span>
+                    <strong id="jumlahSakit">0</strong>
+                </div>
+
+                <div class="stat-card alpa">
+                    <span>Alpa</span>
+                    <strong id="jumlahAlpa">0</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= RIWAYAT ================= -->
+
+    <section id="riwayat" class="section">
+
+        <div class="section-title">
+
+            <p>DATA ABSENSI</p>
+
+            <h2>Riwayat Kehadiran</h2>
+
+            <span>
+                Daftar riwayat absensi Nova Maulidia
+            </span>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Jam</th>
+                        <th>Mata Kuliah</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="tabelAbsensi">
+
+                    <!-- Data akan muncul melalui JavaScript -->
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026 Nova Maulidia | Sistem Absensi Mahasiswa
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
