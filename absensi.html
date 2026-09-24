@@ -4,1123 +4,238 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Presensi Kelas</title>
+    <title>Absensi QR - Nova Maulidia</title>
 
-    <!-- LIBRARY QR CODE -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- LIBRARY SCANNER QR -->
-    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f5f5;
-            color: #222;
-        }
-
-        /* =========================
-           HEADER
-        ========================= */
-
-        header {
-            background: linear-gradient(135deg, #402015, #70452e);
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-
-        header p {
-            font-size: 15px;
-            opacity: 0.9;
-        }
-
-        /* =========================
-           CONTAINER
-        ========================= */
-
-        .container {
-            width: 95%;
-            max-width: 1100px;
-            margin: 30px auto;
-        }
-
-        /* =========================
-           CARD
-        ========================= */
-
-        .card {
-            background: white;
-            border-radius: 18px;
-            padding: 25px;
-            margin-bottom: 25px;
-
-            box-shadow:
-                0 5px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .card h2 {
-            margin-bottom: 10px;
-            color: #4b2a1c;
-        }
-
-        .card p {
-            margin-bottom: 15px;
-            color: #666;
-        }
-
-        /* =========================
-           QR UTAMA
-        ========================= */
-
-        .qr-area {
-            text-align: center;
-            padding: 20px;
-        }
-
-        #qrcode {
-            width: 320px;
-            height: 320px;
-
-            margin: 25px auto;
-
-            background: white;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 10px;
-
-            box-shadow:
-                0 5px 20px rgba(0,0,0,0.15);
-        }
-
-        #qrcode img {
-            width: 290px !important;
-            height: 290px !important;
-        }
-
-        .scan-status {
-            color: #00a85a;
-            font-weight: bold;
-            font-size: 15px;
-            margin-top: 10px;
-        }
-
-        /* =========================
-           BUTTON
-        ========================= */
-
-        .button-area {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        button {
-            border: none;
-            border-radius: 12px;
-
-            padding: 13px 22px;
-
-            font-size: 15px;
-            font-weight: bold;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
-
-        .btn-brown {
-            background: #70452e;
-            color: white;
-        }
-
-        .btn-orange {
-            background: #a97850;
-            color: white;
-        }
-
-        .btn-green {
-            background: #16834c;
-            color: white;
-        }
-
-        .btn-red {
-            background: #c0392b;
-            color: white;
-        }
-
-        /* =========================
-           GENERATE QR MAHASISWA
-        ========================= */
-
-        .input-area {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        input {
-            flex: 1;
-
-            min-width: 220px;
-
-            padding: 13px 15px;
-
-            border: 1px solid #ccc;
-            border-radius: 10px;
-
-            font-size: 15px;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #70452e;
-        }
-
-        #studentQR {
-            margin: 25px auto;
-
-            width: 280px;
-            height: 280px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* =========================
-           SCANNER
-        ========================= */
-
-        #reader {
-            width: 100%;
-            max-width: 500px;
-            margin: 20px auto;
-        }
-
-        .scanner-info {
-            text-align: center;
-            padding: 10px;
-            color: #666;
-        }
-
-        /* =========================
-           DAFTAR MAHASISWA
-        ========================= */
-
-        .student-count {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .student-list {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .student-item {
-            padding: 13px 15px;
-            border-bottom: 1px solid #eee;
-
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .student-item:last-child {
-            border-bottom: none;
-        }
-
-        .empty {
-            padding: 20px;
-            text-align: center;
-            color: #888;
-        }
-
-        /* =========================
-           STATUS
-        ========================= */
-
-        .status-box {
-            padding: 15px;
-
-            background: #f5f5f5;
-
-            border-radius: 10px;
-
-            margin-top: 15px;
-
-            font-size: 14px;
-        }
-
-        .online {
-            color: #008f4c;
-            font-weight: bold;
-        }
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media (max-width: 600px) {
-
-            header h1 {
-                font-size: 25px;
-            }
-
-            #qrcode {
-                width: 270px;
-                height: 270px;
-            }
-
-            #qrcode img {
-                width: 245px !important;
-                height: 245px !important;
-            }
-
-            .button-area {
-                flex-direction: column;
-            }
-
-            button {
-                width: 100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- =========================
-         HEADER
-    ========================= -->
+<header class="header">
 
-    <header>
-
-        <h1>📱 PRESENSI KELAS</h1>
-
-        <p>
-            Scan QR untuk melakukan presensi
-        </p>
-
-    </header>
-
-
-    <!-- =========================
-         CONTAINER
-    ========================= -->
-
-    <div class="container">
-
-
-        <!-- =========================
-             QR PRESENSI UTAMA
-        ========================= -->
-
-        <div class="card">
-
-            <div class="qr-area">
-
-                <h2>Presensi Kelas</h2>
-
-                <p>
-                    Scan QR Code untuk Absensi
-                </p>
-
-
-                <!-- TEMPAT QR CODE -->
-
-                <div id="qrcode"></div>
-
-
-                <div class="scan-status">
-                    🟢 SCAN UNTUK HADIR
-                </div>
-
-
-                <!-- BUTTON -->
-
-                <div class="button-area">
-
-                    <button
-                        class="btn-orange"
-                        onclick="refreshQR()">
-
-                        🔄 Refresh Data
-
-                    </button>
-
-
-                    <button
-                        class="btn-brown"
-                        onclick="downloadQR()">
-
-                        ⬇ Download QR
-
-                    </button>
-
-
-                    <button
-                        class="btn-green"
-                        onclick="openSheet()">
-
-                        ↗ Buka Sheet
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =========================
-             GENERATE QR MAHASISWA
-        ========================= -->
-
-        <div class="card">
-
-            <h2>
-                🔲 Generate QR Code Mahasiswa
-            </h2>
-
-            <p>
-                Masukkan NIM mahasiswa untuk membuat QR Code.
-            </p>
-
-
-            <div class="input-area">
-
-                <input
-                    type="text"
-                    id="nimInput"
-                    placeholder="Masukkan NIM">
-
-
-                <button
-                    class="btn-brown"
-                    onclick="generateStudentQR()">
-
-                    🔲 Generate
-
-                </button>
-
-            </div>
-
-
-            <!-- QR MAHASISWA -->
-
-            <div id="studentQR"></div>
-
-
-            <div class="button-area">
-
-                <button
-                    class="btn-green"
-                    onclick="downloadStudentQR()">
-
-                    ⬇ Download
-
-                </button>
-
-
-                <button
-                    class="btn-red"
-                    onclick="closeStudentQR()">
-
-                    ✖ Tutup
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =========================
-             SCANNER
-        ========================= -->
-
-        <div class="card">
-
-            <h2>
-                📷 Scan QR Code
-            </h2>
-
-            <p>
-                Arahkan kamera ke QR Code presensi.
-            </p>
-
-
-            <div class="scanner-info">
-
-                📷 Pastikan QR Code terlihat jelas
-                dan pencahayaan cukup.
-
-            </div>
-
-
-            <div id="reader"></div>
-
-
-            <div class="button-area">
-
-                <button
-                    class="btn-brown"
-                    onclick="startScanner()">
-
-                    ▶ Mulai Scan
-
-                </button>
-
-
-                <button
-                    class="btn-red"
-                    onclick="stopScanner()">
-
-                    ■ Stop Scan
-
-                </button>
-
-            </div>
-
-
-            <div
-                id="scanResult"
-                class="status-box">
-
-                Status: Menunggu scan
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =========================
-             DAFTAR MAHASISWA
-        ========================= -->
-
-        <div class="card">
-
-            <h2>
-                👥 Daftar Mahasiswa
-            </h2>
-
-
-            <div class="student-count">
-
-                <span id="studentCount">
-                    0
-                </span>
-
-                mahasiswa
-
-            </div>
-
-
-            <div
-                id="studentList"
-                class="student-list">
-
-                <div class="empty">
-
-                    Belum ada data mahasiswa.
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =========================
-             STATUS SISTEM
-        ========================= -->
-
-        <div class="card">
-
-            <h2>
-                ⚙ Status Sistem
-            </h2>
-
-
-            <div class="status-box">
-
-                <p>
-                    🌀 <b>Status:</b>
-                    <span id="systemStatus">
-                        Memuat data...
-                    </span>
-                </p>
-
-
-                <p>
-                    🛡 <b>Koneksi:</b>
-                    <span class="online">
-                        Terhubung
-                    </span>
-                </p>
-
-
-                <p>
-                    📊 <b>Database:</b>
-                    Google Sheets
-                </p>
-
-            </div>
-
-        </div>
-
-
+    <div class="logo">
+        🎓 <span>Absensi QR</span>
     </div>
 
+    <nav>
+        <a href="#beranda" class="active">
+            🏠 Beranda
+        </a>
 
+        <a href="#absensi">
+            ▣ Absensi
+        </a>
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
+        <a href="#daftar">
+            📋 Daftar Absen
+        </a>
+    </nav>
 
-    <script>
+    <div class="firebase">
+        <span></span>
+        Sistem Online
+    </div>
 
-        /* ==================================
-           DATA DASAR
-        ================================== */
+</header>
 
-        const LINK_ABSENSI =
-            "http://localhost:5500/absensi.html";
 
+<main>
 
-        /*
-         * Kalau kamu sudah punya Google Sheet,
-         * masukkan link Google Sheet di sini.
-         */
+    <!-- BERANDA -->
 
-        const GOOGLE_SHEET_URL =
-            "https://docs.google.com/spreadsheets/";
+    <section id="beranda" class="hero">
 
+        <h1>Absensi QR</h1>
 
-        let scanner = null;
+        <p>
+            Sistem Presensi Mahasiswa Berbasis QR Code
+        </p>
 
-        let studentQR = null;
+        <div class="online">
+            ● Sistem Online
+        </div>
 
+    </section>
 
 
-        /* ==================================
-           GENERATE QR UTAMA
-        ================================== */
+    <!-- FORM ABSENSI -->
 
-        function generateMainQR() {
+    <section id="absensi" class="card welcome-card">
 
-            const qrContainer =
-                document.getElementById("qrcode");
+        <div class="circle-icon">
+            🎓
+        </div>
 
+        <h2>
+            Selamat Datang! 👋
+        </h2>
 
-            /*
-             * Hapus QR sebelumnya
-             */
+        <p class="description">
+            Masukkan NIM / NPM kamu untuk melanjutkan proses absensi.
+        </p>
 
-            qrContainer.innerHTML = "";
+        <label>
+            👤 &nbsp; NIM / NPM
+        </label>
 
+        <input
+            type="text"
+            id="nim"
+            placeholder="Contoh: 2410511105"
+        >
 
-            /*
-             * Membuat QR baru
-             */
+        <button onclick="buatQR()">
+            ▦ &nbsp; Buat QR Absensi
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
 
-            new QRCode(qrContainer, {
+        <div class="info">
+            ℹ️ &nbsp; Pastikan NIM yang kamu masukkan sudah terdaftar di sistem.
+        </div>
 
-                text: LINK_ABSENSI,
+    </section>
 
-                width: 290,
 
-                height: 290,
+    <!-- QR -->
 
-                colorDark: "#000000",
+    <section id="qrSection" class="card qr-card hidden">
 
-                colorLight: "#ffffff",
+        <h2>QR Absensi</h2>
 
-                correctLevel:
-                    QRCode.CorrectLevel.H
+        <p>
+            Tampilkan QR kemudian scan menggunakan HP.
+        </p>
 
-            });
+        <div id="qrcode"></div>
 
+        <div id="qrNama"></div>
 
-            document.getElementById(
-                "systemStatus"
-            ).innerText =
-                "QR Code siap digunakan";
+        <button class="secondary" onclick="tampilkanScanner()">
+            📷 Scan QR
+        </button>
 
-        }
+    </section>
 
 
+    <!-- SCANNER -->
 
-        /* ==================================
-           REFRESH QR
-        ================================== */
+    <section id="scannerSection" class="card hidden">
 
-        function refreshQR() {
+        <h2>📷 Scan QR Absensi</h2>
 
-            generateMainQR();
+        <p>
+            Arahkan kamera HP ke QR Code.
+        </p>
 
-            alert(
-                "QR Code berhasil diperbarui!"
-            );
+        <div id="reader"></div>
 
-        }
+        <div id="scanResult"></div>
 
+    </section>
 
 
-        /* ==================================
-           DOWNLOAD QR UTAMA
-        ================================== */
+    <!-- DAFTAR MAHASISWA -->
 
-        function downloadQR() {
+    <section id="daftar" class="card">
 
-            const qr =
-                document.querySelector(
-                    "#qrcode img"
-                );
+        <div class="section-title">
 
+            <div class="title-icon">
+                📋
+            </div>
 
-            if (!qr) {
+            <div>
+                <h2>Daftar Mahasiswa Sudah Absen</h2>
 
-                alert(
-                    "QR Code belum tersedia."
-                );
+                <p>
+                    Data mahasiswa yang sudah melakukan absensi.
+                </p>
+            </div>
 
-                return;
-            }
+        </div>
 
 
-            const link =
-                document.createElement("a");
+        <div class="stats">
 
+            <div class="stat blue">
+                <div class="stat-icon">
+                    👥
+                </div>
 
-            link.href = qr.src;
+                <div>
+                    <small>Total Absensi</small>
+                    <strong id="totalAbsen">0</strong>
+                </div>
+            </div>
 
-            link.download =
-                "QR-Presensi-Kelas.png";
 
+            <div class="stat green">
+                <div class="stat-icon">
+                    ✓
+                </div>
 
-            link.click();
+                <div>
+                    <small>Status</small>
+                    <strong>HADIR</strong>
+                </div>
+            </div>
 
-        }
 
+            <div class="stat yellow">
+                <div class="stat-icon">
+                    📅
+                </div>
 
+                <div>
+                    <small>Sistem</small>
+                    <strong>Aktif</strong>
+                </div>
+            </div>
 
-        /* ==================================
-           BUKA GOOGLE SHEET
-        ================================== */
+        </div>
 
-        function openSheet() {
 
-            window.open(
-                GOOGLE_SHEET_URL,
-                "_blank"
-            );
+        <div class="table-container">
 
-        }
+            <table>
 
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>NPM</th>
+                        <th>Nama</th>
+                    </tr>
+                </thead>
 
+                <tbody id="tabelMahasiswa">
 
-        /* ==================================
-           GENERATE QR MAHASISWA
-        ================================== */
+                </tbody>
 
-        function generateStudentQR() {
+            </table>
 
-            const nim =
-                document
-                .getElementById("nimInput")
-                .value
-                .trim();
+        </div>
 
+    </section>
 
-            if (nim === "") {
+</main>
 
-                alert(
-                    "Masukkan NIM terlebih dahulu!"
-                );
 
-                return;
-            }
+<footer>
 
+    © 2026 Absensi QR <br>
+    Sistem Presensi Mahasiswa Berbasis QR Code
 
-            const container =
-                document.getElementById(
-                    "studentQR"
-                );
+</footer>
 
 
-            container.innerHTML = "";
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
+<script src="https://unpkg.com/html5-qrcode"></script>
 
-            /*
-             * Data yang disimpan dalam QR
-             */
-
-            const data = JSON.stringify({
-
-                tipe: "presensi",
-
-                nim: nim,
-
-                waktu:
-                    new Date().toISOString()
-
-            });
-
-
-            studentQR =
-                new QRCode(container, {
-
-                    text: data,
-
-                    width: 270,
-
-                    height: 270,
-
-                    colorDark: "#000000",
-
-                    colorLight: "#ffffff",
-
-                    correctLevel:
-                        QRCode.CorrectLevel.H
-
-                });
-
-        }
-
-
-
-        /* ==================================
-           DOWNLOAD QR MAHASISWA
-        ================================== */
-
-        function downloadStudentQR() {
-
-            const qr =
-                document.querySelector(
-                    "#studentQR img"
-                );
-
-
-            if (!qr) {
-
-                alert(
-                    "Generate QR terlebih dahulu."
-                );
-
-                return;
-            }
-
-
-            const link =
-                document.createElement("a");
-
-
-            link.href = qr.src;
-
-            link.download =
-                "QR-Mahasiswa.png";
-
-
-            link.click();
-
-        }
-
-
-
-        /* ==================================
-           TUTUP QR MAHASISWA
-        ================================== */
-
-        function closeStudentQR() {
-
-            document
-                .getElementById(
-                    "studentQR"
-                )
-                .innerHTML = "";
-
-
-            document
-                .getElementById(
-                    "nimInput"
-                )
-                .value = "";
-
-        }
-
-
-
-        /* ==================================
-           SCANNER
-        ================================== */
-
-        function startScanner() {
-
-            if (scanner) {
-
-                return;
-
-            }
-
-
-            scanner =
-                new Html5Qrcode(
-                    "reader"
-                );
-
-
-            scanner.start(
-
-                {
-                    facingMode: "environment"
-                },
-
-                {
-                    fps: 10,
-
-                    qrbox: {
-                        width: 250,
-                        height: 250
-                    }
-
-                },
-
-                function(decodedText) {
-
-                    document
-                        .getElementById(
-                            "scanResult"
-                        )
-                        .innerHTML =
-                        "✅ QR berhasil dibaca:<br><b>"
-                        + decodedText
-                        + "</b>";
-
-
-                    /*
-                     * Setelah berhasil scan,
-                     * scanner dihentikan.
-                     */
-
-                    stopScanner();
-
-                },
-
-                function(errorMessage) {
-
-                    /*
-                     * Error scan tidak perlu
-                     * ditampilkan terus menerus.
-                     */
-
-                }
-
-            ).catch(function(error) {
-
-                document
-                    .getElementById(
-                        "scanResult"
-                    )
-                    .innerHTML =
-                    "❌ Kamera tidak dapat digunakan.<br>"
-                    + error;
-
-            });
-
-        }
-
-
-
-        /* ==================================
-           STOP SCANNER
-        ================================== */
-
-        function stopScanner() {
-
-            if (!scanner) {
-
-                return;
-
-            }
-
-
-            scanner.stop()
-
-                .then(function() {
-
-                    scanner.clear();
-
-                    scanner = null;
-
-                    document
-                        .getElementById(
-                            "scanResult"
-                        )
-                        .innerText =
-                        "Status: Scanner dihentikan";
-
-                })
-
-                .catch(function(error) {
-
-                    console.log(error);
-
-                });
-
-        }
-
-
-
-        /* ==================================
-           TAMBAH DATA CONTOH
-        ================================== */
-
-        function loadStudents() {
-
-            /*
-             * Data contoh.
-             *
-             * Nanti bagian ini bisa diganti
-             * dengan data Google Sheets.
-             */
-
-            const students = [
-
-                {
-                    nim: "231001",
-                    nama: "Mahasiswa 1"
-                },
-
-                {
-                    nim: "231002",
-                    nama: "Mahasiswa 2"
-                },
-
-                {
-                    nim: "231003",
-                    nama: "Mahasiswa 3"
-                }
-
-            ];
-
-
-            const list =
-                document.getElementById(
-                    "studentList"
-                );
-
-
-            list.innerHTML = "";
-
-
-            students.forEach(function(student) {
-
-                const item =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                item.className =
-                    "student-item";
-
-
-                item.innerHTML = `
-
-                    <span>
-                        ${student.nama}
-                    </span>
-
-                    <b>
-                        ${student.nim}
-                    </b>
-
-                `;
-
-
-                list.appendChild(item);
-
-            });
-
-
-            document
-                .getElementById(
-                    "studentCount"
-                )
-                .innerText =
-                students.length;
-
-        }
-
-
-
-        /* ==================================
-           SAAT HALAMAN DIBUKA
-        ================================== */
-
-        window.addEventListener(
-            "load",
-            function() {
-
-                /*
-                 * Buat QR otomatis
-                 */
-
-                generateMainQR();
-
-
-                /*
-                 * Load daftar mahasiswa
-                 */
-
-                loadStudents();
-
-
-                /*
-                 * Ubah status
-                 */
-
-                document
-                    .getElementById(
-                        "systemStatus"
-                    )
-                    .innerText =
-                    "Menunggu scan";
-
-            }
-        );
-
-    </script>
+<script src="script.js"></script>
 
 </body>
 </html>
