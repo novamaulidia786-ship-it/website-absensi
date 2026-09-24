@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Absensi QR - Nova Maulidia</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        🎓 <span>Absensi QR</span>
+    </div>
+
+    <nav>
+        <a href="#beranda" class="active">
+            🏠 Beranda
+        </a>
+
+        <a href="#absensi">
+            ▣ Absensi
+        </a>
+
+        <a href="#daftar">
+            📋 Daftar Absen
+        </a>
+    </nav>
+
+    <div class="firebase">
+        <span></span>
+        Sistem Online
+    </div>
+
+</header>
+
+
+<main>
+
+    <!-- BERANDA -->
+
+    <section id="beranda" class="hero">
+
+        <h1>Absensi QR</h1>
+
+        <p>
+            Sistem Presensi Mahasiswa Berbasis QR Code
+        </p>
+
+        <div class="online">
+            ● Sistem Online
+        </div>
+
+    </section>
+
+
+    <!-- FORM ABSENSI -->
+
+    <section id="absensi" class="card welcome-card">
+
+        <div class="circle-icon">
+            🎓
+        </div>
+
+        <h2>
+            Selamat Datang! 👋
+        </h2>
+
+        <p class="description">
+            Masukkan NIM / NPM kamu untuk melanjutkan proses absensi.
+        </p>
+
+        <label>
+            👤 &nbsp; NIM / NPM
+        </label>
+
+        <input
+            type="text"
+            id="nim"
+            placeholder="Contoh: 2410511105"
+        >
+
+        <button onclick="buatQR()">
+            ▦ &nbsp; Buat QR Absensi
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <div class="info">
+            💗 &nbsp; Pastikan NIM yang kamu masukkan sudah terdaftar di sistem.
+        </div>
+
+    </section>
+
+
+    <!-- QR -->
+
+    <section id="qrSection" class="card qr-card hidden">
+
+        <h2>💗 QR Absensi</h2>
+
+        <p>
+            Tampilkan QR kemudian scan menggunakan HP.
+        </p>
+
+        <div id="qrcode"></div>
+
+        <div id="qrNama"></div>
+
+        <button class="secondary" onclick="tampilkanScanner()">
+            📷 Scan QR
+        </button>
+
+    </section>
+
+
+    <!-- SCANNER -->
+
+    <section id="scannerSection" class="card hidden">
+
+        <h2>📷 Scan QR Absensi</h2>
+
+        <p>
+            Arahkan kamera HP ke QR Code.
+        </p>
+
+        <div id="reader"></div>
+
+        <div id="scanResult"></div>
+
+    </section>
+
+
+    <!-- DAFTAR MAHASISWA -->
+
+    <section id="daftar" class="card">
+
+        <div class="section-title">
+
+            <div class="title-icon">
+                📋
+            </div>
+
+            <div>
+                <h2>Daftar Mahasiswa Sudah Absen</h2>
+
+                <p>
+                    Data mahasiswa yang sudah melakukan absensi.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat blue">
+                <div class="stat-icon">
+                    👥
+                </div>
+
+                <div>
+                    <small>Total Absensi</small>
+                    <strong id="totalAbsen">0</strong>
+                </div>
+            </div>
+
+
+            <div class="stat green">
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+                <div>
+                    <small>Status</small>
+                    <strong>HADIR</strong>
+                </div>
+            </div>
+
+
+            <div class="stat yellow">
+                <div class="stat-icon">
+                    📅
+                </div>
+
+                <div>
+                    <small>Sistem</small>
+                    <strong>Aktif</strong>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>NPM</th>
+                        <th>Nama</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tabelMahasiswa">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    © 2026 Absensi QR <br>
+    Sistem Presensi Mahasiswa Berbasis QR Code
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
