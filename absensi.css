@@ -11,14 +11,14 @@ html {
 body {
     font-family: Arial, sans-serif;
     background: #f6f4ed;
-    color: #214d42;
+    color: #7a3655;
 }
 
 
 /* HEADER */
 
 .header {
-    background: #123f35;
+    background: #8e3f63;
     color: white;
     padding: 35px 30px 30px;
     text-align: center;
@@ -53,7 +53,7 @@ nav a {
 
 nav a.active,
 nav a:hover {
-    background: #62a68f;
+    background: #d05287;
     color: white;
 }
 
@@ -212,7 +212,7 @@ button {
 }
 
 button:hover {
-    background: #1f604f;
+    background: #b83d70;
     transform: translateY(-2px);
 }
 
@@ -408,7 +408,7 @@ table {
 }
 
 thead {
-    background: #205446;
+    background: #8e3f63;
     color: white;
 }
 
