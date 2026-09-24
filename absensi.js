@@ -43,7 +43,7 @@ function tampilkanData() {
 
     tabel.innerHTML = "";
 
-    dataAbsen.forEach((data, index) => {
+    mahasiswa.forEach((data, index) => {
 
         const row = document.createElement("tr");
 
