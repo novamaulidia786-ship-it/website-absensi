@@ -215,6 +215,8 @@ function prosesAbsensi(qrData) {
             nim: data.nim,
 
             nama: data.nama,
+           
+           status: "HADIR"
 
             waktu: new Date()
                 .toLocaleString("id-ID")
