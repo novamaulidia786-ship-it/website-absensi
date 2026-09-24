@@ -4,12 +4,12 @@
 
 const mahasiswa = [
     {
-        nim: "24105111107",
-        nama: "Yazra"
+        nim: "24105111116",
+        nama: "Hayaton nufus"
     },
     {
-        nim: "24105111110",
-        nama: "Khalisa Huemaiira"
+        nim: "24105111143",
+        nama: "Hasil aminah x michael"
     },
     {
         nim: "24105111106",
@@ -25,6 +25,7 @@ const mahasiswa = [
     }
 ];
 
+
 /* =========================
    DATA ABSENSI
 ========================= */
@@ -32,6 +33,7 @@ const mahasiswa = [
 let dataAbsen = JSON.parse(
     localStorage.getItem("dataAbsen")
 ) || [];
+
 
 /* =========================
    TAMPILKAN DATA
@@ -43,6 +45,7 @@ function tampilkanData() {
 
     tabel.innerHTML = "";
 
+    // Menampilkan SEMUA mahasiswa
     mahasiswa.forEach((data, index) => {
 
         const row = document.createElement("tr");
@@ -56,9 +59,11 @@ function tampilkanData() {
         tabel.appendChild(row);
     });
 
+    // Menampilkan jumlah mahasiswa yang sudah absen
     document.getElementById("totalAbsen").textContent =
         dataAbsen.length;
 }
+
 
 /* =========================
    BUAT QR
@@ -122,11 +127,13 @@ function buatQR() {
         });
 }
 
+
 /* =========================
    SCANNER
 ========================= */
 
 let scanner = null;
+
 
 function tampilkanScanner() {
 
@@ -141,6 +148,7 @@ function tampilkanScanner() {
 
     mulaiScanner();
 }
+
 
 function mulaiScanner() {
 
@@ -186,6 +194,7 @@ function mulaiScanner() {
     });
 }
 
+
 /* =========================
    PROSES ABSENSI
 ========================= */
@@ -215,8 +224,6 @@ function prosesAbsensi(qrData) {
             nim: data.nim,
 
             nama: data.nama,
-           
-           status: "HADIR"
 
             waktu: new Date()
                 .toLocaleString("id-ID")
@@ -258,6 +265,7 @@ function prosesAbsensi(qrData) {
 
     }
 }
+
 
 /* =========================
    JALANKAN SAAT HALAMAN DIBUKA

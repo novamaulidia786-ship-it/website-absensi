@@ -10,7 +10,7 @@ html {
 
 body {
     font-family: Arial, sans-serif;
-    background: #f6f4ed;
+    background: #fff5f9;
     color: #7a3655;
 }
 
@@ -18,7 +18,7 @@ body {
 /* HEADER */
 
 .header {
-    background: #8e3f63;
+    background: #a83f6b;
     color: white;
     padding: 35px 30px 30px;
     text-align: center;
@@ -45,7 +45,7 @@ nav {
 
 nav a {
     text-decoration: none;
-    color: #d9e6df;
+    color: #ffe4ee;
     font-size: 20px;
     padding: 15px 25px;
     border-radius: 20px;
@@ -53,7 +53,7 @@ nav a {
 
 nav a.active,
 nav a:hover {
-    background: #d05287;
+    background: #df719d;
     color: white;
 }
 
@@ -62,7 +62,7 @@ nav a:hover {
     margin: 25px auto 0;
     max-width: 760px;
     padding: 20px;
-    background: #1e5145;
+    background: #91385f;
     border-radius: 18px;
     font-size: 20px;
 }
@@ -71,7 +71,7 @@ nav a:hover {
     display: inline-block;
     width: 16px;
     height: 16px;
-    background: #5de49b;
+    background: #ff9fc3;
     border-radius: 50%;
     margin-right: 12px;
 }
@@ -99,17 +99,17 @@ main {
 
 .hero p {
     font-size: 27px;
-    color: #71817b;
+    color: #92717f;
     margin-bottom: 25px;
 }
 
 .online {
     display: inline-block;
     padding: 15px 30px;
-    border: 2px solid #bce2d2;
-    background: #e7f5ed;
+    border: 2px solid #f2b7cd;
+    background: #ffe8f1;
     border-radius: 40px;
-    color: #277457;
+    color: #b83f70;
     font-size: 20px;
     font-weight: bold;
 }
@@ -119,11 +119,11 @@ main {
 
 .card {
     background: #fffefa;
-    border: 2px solid #e2ded3;
+    border: 2px solid #f0d5e0;
     border-radius: 35px;
     padding: 40px;
     margin-bottom: 40px;
-    box-shadow: 0 8px 30px rgba(40, 50, 45, 0.05);
+    box-shadow: 0 8px 30px rgba(180, 70, 110, 0.08);
 }
 
 
@@ -137,7 +137,7 @@ main {
 .circle-icon {
     width: 150px;
     height: 150px;
-    background: #e5f1eb;
+    background: #ffe0eb;
     border-radius: 50%;
     margin: auto;
     display: flex;
@@ -154,7 +154,7 @@ main {
 
 .description {
     font-size: 25px;
-    color: #71817b;
+    color: #92717f;
     max-width: 750px;
     margin: auto auto 50px;
     line-height: 1.4;
@@ -179,7 +179,7 @@ input {
 
     padding: 25px;
 
-    border: 2px solid #d5ddd8;
+    border: 2px solid #e7c7d5;
     border-radius: 25px;
 
     font-size: 25px;
@@ -187,7 +187,7 @@ input {
 }
 
 input:focus {
-    border-color: #28745f;
+    border-color: #d65388;
 }
 
 
@@ -200,7 +200,7 @@ button {
     border: none;
     border-radius: 25px;
 
-    background: #28735e;
+    background: #d65388;
     color: white;
 
     font-size: 25px;
@@ -212,7 +212,7 @@ button {
 }
 
 button:hover {
-    background: #b83d70;
+    background: #b83c70;
     transform: translateY(-2px);
 }
 
@@ -224,10 +224,10 @@ button:hover {
 
     text-align: left;
 
-    background: #eef4f0;
+    background: #fff0f5;
     border-radius: 22px;
 
-    color: #62766e;
+    color: #876675;
     font-size: 20px;
 }
 
@@ -246,7 +246,7 @@ button:hover {
 
 .qr-card p,
 #scannerSection p {
-    color: #71817b;
+    color: #92717f;
     font-size: 20px;
     margin-bottom: 25px;
 }
@@ -269,7 +269,7 @@ button:hover {
 }
 
 .secondary {
-    background: #527a6e;
+    background: #b95b82;
 }
 
 
@@ -304,7 +304,7 @@ button:hover {
     align-items: center;
     justify-content: center;
 
-    background: #e4f0e9;
+    background: #ffe1ec;
     border-radius: 30px;
 
     font-size: 45px;
@@ -317,7 +317,7 @@ button:hover {
 .section-title p {
     margin-top: 8px;
     font-size: 21px;
-    color: #71817b;
+    color: #92717f;
 }
 
 
@@ -364,33 +364,35 @@ button:hover {
 }
 
 
+/* STATISTIK */
+
 .blue {
-    background: #eaf3fa;
-    color: #3371a5;
+    background: #fce8f0;
+    color: #b33f70;
 }
 
 .blue .stat-icon {
-    background: #dcecf8;
+    background: #f8d5e2;
 }
 
 
 .green {
-    background: #e8f6ed;
-    color: #317b5a;
+    background: #fde7f0;
+    color: #b83f70;
 }
 
 .green .stat-icon {
-    background: #d4eddd;
+    background: #f7cddd;
 }
 
 
 .yellow {
-    background: #f5f1e7;
-    color: #7a6d4b;
+    background: #fff0f5;
+    color: #a74c70;
 }
 
 .yellow .stat-icon {
-    background: #ebe3ca;
+    background: #f8d6e2;
 }
 
 
@@ -408,7 +410,7 @@ table {
 }
 
 thead {
-    background: #8e3f63;
+    background: #a83f6b;
     color: white;
 }
 
@@ -421,8 +423,8 @@ th {
 td {
     padding: 25px;
     font-size: 20px;
-    color: #596b65;
-    border-bottom: 1px solid #e2e7e4;
+    color: #69515d;
+    border-bottom: 1px solid #efdce4;
 }
 
 
@@ -430,7 +432,7 @@ td {
 
 footer {
     text-align: center;
-    color: #89958f;
+    color: #9b7b88;
     font-size: 18px;
     line-height: 1.6;
     padding: 30px;
