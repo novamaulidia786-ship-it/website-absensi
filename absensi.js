@@ -9,7 +9,7 @@ const mahasiswa = [
     },
     {
         nim: "24105111110",
-        nama: "Khalisa huemaiira"
+        nama: "Khalisa Huemaiira"
     },
     {
         nim: "24105111106",
