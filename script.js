@@ -4,12 +4,12 @@
 
 const mahasiswa = [
     {
-        nim: "24105111110",
-        nama: "Khalisa Huemaiira"
-    },
-    {
         nim: "24105111107",
         nama: "Yazra"
+    },
+    {
+        nim: "24105111110",
+        nama: "Khalisa Huemaiira"
     },
     {
         nim: "24105111106",
