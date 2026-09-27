@@ -61,7 +61,7 @@ function tampilkanData() {
 
     // Menampilkan jumlah mahasiswa yang sudah absen
     document.getElementById("totalAbsen").textContent =
-        dataAbsen.length;
+        mahasiswa.length;
 }
 
 
